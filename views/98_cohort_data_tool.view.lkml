@@ -70,7 +70,7 @@ view: cohort_size {
       ELSE TO_CHAR(DATE_TRUNC('month', CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', users.created_at )), 'YYYY-MM')
       END AS cohort,
       COUNT(DISTINCT users.id ) AS cohort_size
-      FROM ecomm.users AS users
+      FROM looker-private-demo.ecomm.users AS users
       GROUP BY 1
        ;;
   }

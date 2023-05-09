@@ -1,10 +1,10 @@
 view: inventory_snapshot {
   derived_table: {
-    datagroup_trigger: ecommerce_etl
+    datagroup_trigger: looker-private-demo.ecommerce_etl
     sql: with calendar as
       (
       select distinct to_date(created_at) as snapshot_date
-      from ecomm.inventory_items
+      from looker-private-demo.ecomm.inventory_items
       -- where dateadd('day',90,created_at)>=current_date
       )
 
@@ -12,7 +12,7 @@ view: inventory_snapshot {
       inventory_items.product_id
       ,calendar.snapshot_date
       ,count(*) as number_in_stock
-      from ecomm.inventory_items
+      from looker-private-demo.ecomm.inventory_items
       left join calendar
       on inventory_items.created_at <= calendar.snapshot_date
       and (inventory_items.sold_at >= calendar.snapshot_date OR inventory_items.sold_at is null)

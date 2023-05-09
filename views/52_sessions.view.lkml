@@ -1,6 +1,6 @@
 view: sessions {
   derived_table: {
-    datagroup_trigger: ecommerce_etl
+    datagroup_trigger: looker-private-demo.ecommerce_etl
     sql: SELECT
         session_id
         , MIN(created_at) AS session_start
@@ -13,7 +13,7 @@ view: sessions {
         , MAX(user_id) AS session_user_id
         , MIN(id) AS landing_event_id
         , MAX(id) AS bounce_event_id
-      FROM ecomm.events
+      FROM looker-private-demo.ecomm.events
       GROUP BY session_id
        ;;
   }

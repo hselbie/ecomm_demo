@@ -1,5 +1,5 @@
 view: events {
-  sql_table_name: ecomm.events ;;
+  sql_table_name: looker-private-demo.ecomm.events ;;
 
   dimension: event_id {
     type: number

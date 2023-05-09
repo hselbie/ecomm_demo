@@ -1,9 +1,9 @@
 view: trailing_sales_snapshot {
   derived_table: {
-    datagroup_trigger: ecommerce_etl
+    datagroup_trigger: looker-private-demo.ecommerce_etl
     sql: with calendar as
       (select distinct to_date(created_at) as snapshot_date
-      from ecomm.inventory_items
+      from looker-private-demo.ecomm.inventory_items
       -- where dateadd('day',90,created_at)>=current_date
       )
 
@@ -14,8 +14,8 @@ view: trailing_sales_snapshot {
       ,to_date(order_items.created_at) as snapshot_date
       ,count(*) as trailing_28d_sales
 
-      from ecomm.order_items
-      left join ecomm.inventory_items on order_items.inventory_item_id = inventory_items.id
+      from looker-private-demo.ecomm.order_items
+      left join looker-private-demo.ecomm.inventory_items on order_items.inventory_item_id = inventory_items.id
       left join calendar
       on order_items.created_at <= dateadd('day',28,calendar.snapshot_date)
       and order_items.created_at >= calendar.snapshot_date

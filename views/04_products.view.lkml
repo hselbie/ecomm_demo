@@ -1,5 +1,5 @@
 view: products {
-  sql_table_name: ecomm.products ;;
+  sql_table_name: looker-private-demo.ecomm.products ;;
 
   dimension: id {
     primary_key: yes
