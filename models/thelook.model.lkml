@@ -6,10 +6,10 @@ include: "/dashboards/*.dashboard.lookml" # include all the views
 
 ############ Model Configuration #############
 
-datagroup: ecommerce_etl {
-  sql_trigger: SELECT max(completed_at) FROM ecomm.etl_jobs ;;
+datagroup: looker-private-demo.ecommerce_etl {
+  sql_trigger: SELECT max(completed_at) FROM looker-private-demo.ecomm.etl_jobs ;;
   max_cache_age: "24 hours"}
-persist_with: ecommerce_etl
+persist_with: looker-private-demo.ecommerce_etl
 ############ Base Explores #############
 
 explore: order_items {

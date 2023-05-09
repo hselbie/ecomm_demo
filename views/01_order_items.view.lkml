@@ -193,7 +193,7 @@ view: order_items {
   dimension: months_since_signup {
     view_label: "Orders"
     type: number
-    sql: DATEDIFF('month',${users.created_raw},${created_raw}) ;;
+    sql: DATE_DIFF('month',${users.created_raw},${created_raw}) ;;
   }
 
 ########## Logistics ##########
@@ -205,8 +205,8 @@ view: order_items {
   dimension: days_to_process {
     type: number
     sql: CASE
-        WHEN ${status} = 'Processing' THEN DATEDIFF('day',${created_raw},current_date)*1.0
-        WHEN ${status} IN ('Shipped', 'Complete', 'Returned') THEN DATEDIFF('day',${created_raw},${shipped_raw})*1.0
+        WHEN ${status} = 'Processing' THEN DATE_DIFF('day',${created_raw},current_date)*1.0
+        WHEN ${status} IN ('Shipped', 'Complete', 'Returned') THEN DATE_DIFF('day',${created_raw},${shipped_raw})*1.0
         WHEN ${status} = 'Cancelled' THEN NULL
       END
        ;;
@@ -343,7 +343,7 @@ view: order_items {
   dimension: days_until_next_order {
     type: number
     view_label: "Repeat Purchase Facts"
-    sql: DATEDIFF('day',${created_raw},${repeat_purchase_facts.next_order_raw}) ;;
+    sql: DATE_DIFF('day',${created_raw},${repeat_purchase_facts.next_order_raw}) ;;
   }
 
   dimension: repeat_orders_within_30d {
@@ -441,7 +441,7 @@ view: order_items {
   dimension: periods_as_customer {
     type: number
     hidden: yes
-    sql: DATEDIFF({% parameter cohort_by %}, ${user_order_facts.first_order_date}, ${user_order_facts.latest_order_date})
+    sql: DATE_DIFF({% parameter cohort_by %}, ${user_order_facts.first_order_date}, ${user_order_facts.latest_order_date})
       ;;
   }
 
