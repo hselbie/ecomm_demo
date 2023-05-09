@@ -57,7 +57,7 @@ view: data_tool {
               WHEN ${event_raw} >=  {% date_start previous_period_filter %}
                 AND ${event_raw}  < {% date_end previous_period_filter %}
                 THEN 'This Period'
-              WHEN ${event_raw}  >= DATEADD(day,-1*DATEDIFF('day',{% date_start previous_period_filter %}, {% date_end previous_period_filter %} ), DATEADD(day,-1,{% date_start previous_period_filter %} ) )
+              WHEN ${event_raw}  >= DATEADD(day,-1*DATE_DIFF('day',{% date_start previous_period_filter %}, {% date_end previous_period_filter %} ), DATEADD(day,-1,{% date_start previous_period_filter %} ) )
                 AND ${event_raw}  < DATEADD(day,-1,{% date_start previous_period_filter %} )
                 THEN 'Previous Period'
             END

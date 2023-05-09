@@ -40,7 +40,7 @@ view: inventory_items {
   dimension: days_in_inventory {
     description: "days between created and sold date"
     type: number
-    sql: DATEDIFF('day', ${created_raw}, coalesce(${sold_raw},CURRENT_DATE)) ;;
+    sql: DATE_DIFF('day', ${created_raw}, coalesce(${sold_raw},CURRENT_DATE)) ;;
   }
 
   dimension: days_in_inventory_tier {
@@ -52,7 +52,7 @@ view: inventory_items {
 
   dimension: days_since_arrival {
     description: "days since created - useful when filtering on sold yesno for items still in inventory"
-    sql: DATEDIFF('day', ${created_date}, ) ;;
+    sql: DATE_DIFF('day', ${created_date}, ) ;;
     type: duration_day
     sql_start: ${created_date} ;;
     sql_end: CURRENT_DATE ;;

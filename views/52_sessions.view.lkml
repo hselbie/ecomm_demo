@@ -60,7 +60,7 @@ view: sessions {
   dimension: duration {
     label: "Duration (sec)"
     type: number
-    sql: DATEDIFF('second', ${session_start_raw}, ${session_end_raw}) ;;
+    sql: DATE_DIFF('second', ${session_start_raw}, ${session_end_raw}) ;;
   }
 
   measure: average_duration {

@@ -43,7 +43,7 @@ view: user_order_facts {
   dimension: days_as_customer {
     description: "Days between first and latest order"
     type: number
-    sql: DATEDIFF('day', ${TABLE}.first_order, ${TABLE}.latest_order)+1 ;;
+    sql: DATE_DIFF('day', ${TABLE}.first_order, ${TABLE}.latest_order)+1 ;;
   }
 
   dimension: days_as_customer_tiered {
