@@ -1,4 +1,4 @@
-connection: "snowflake"
+connection: "bq"
 label: "1) eCommerce with Event Data"
 include: "/views/**/*.view" # include all the views
 include: "/dashboards/*.dashboard.lookml" # include all the views
