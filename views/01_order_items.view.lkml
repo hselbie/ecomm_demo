@@ -343,7 +343,7 @@ view: order_items {
   dimension: days_until_next_order {
     type: number
     view_label: "Repeat Purchase Facts"
-    sql: DATE_DIFF('day',${created_raw},${repeat_purchase_facts.next_order_raw}) ;;
+    sql: DATE_DIFF(${created_date},${repeat_purchase_facts.next_order_date}, day) ;;
   }
 
   dimension: repeat_orders_within_30d {
