@@ -1,6 +1,5 @@
 view: affinity {
   derived_table: {
-    datagroup_trigger: looker-private-demo.ecommerce_etl
     sql: SELECT
         product_a_id
         , product_b_id

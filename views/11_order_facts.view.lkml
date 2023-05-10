@@ -13,7 +13,6 @@ view: order_facts {
         sql: RANK() OVER (PARTITION BY user_id ORDER BY created_at) ;;
       }
     }
-    datagroup_trigger: looker-private-demo.ecommerce_etl
   }
   dimension: order_id {
     type: number

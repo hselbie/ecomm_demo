@@ -173,12 +173,12 @@ view: order_items {
   dimension: reporting_period {
     group_label: "Order Date"
     sql: CASE
-        WHEN date_part('year',${created_raw}) = date_part('year',current_date())
-        AND ${created_raw} < CURRENT_DATE
+        WHEN EXTRACT(year FROM ${created_date}) = EXTRACT(year FROM current_date())
+        AND ${created_date} < CURRENT_DATE
         THEN 'This Year to Date'
 
-        WHEN date_part('year',${created_raw}) + 1 = date_part('year',current_date())
-        AND date_part('dayofyear',${created_raw}) <= date_part('dayofyear',current_date())
+        WHEN EXTRACT(year FROM ${created_date}) + 1 = EXTRACT(year FROM current_date())
+        AND EXTRACT(dayofyear FROM ${created_date}) <= EXTRACT(dayofyear FROM current_date())
         THEN 'Last Year to Date'
 
       END
@@ -187,13 +187,13 @@ view: order_items {
 
   dimension: days_since_sold {
     hidden: yes
-    sql: datediff('day',${created_raw},CURRENT_DATE) ;;
+    sql: datediff(${created_date},CURRENT_DATE, day) ;;
   }
 
   dimension: months_since_signup {
     view_label: "Orders"
     type: number
-    sql: DATE_DIFF('month',${users.created_raw},${created_raw}) ;;
+    sql: DATE_DIFF(${users.created_date},${created_date}, month) ;;
   }
 
 ########## Logistics ##########
@@ -205,8 +205,8 @@ view: order_items {
   dimension: days_to_process {
     type: number
     sql: CASE
-        WHEN ${status} = 'Processing' THEN DATE_DIFF('day',${created_raw},current_date())*1.0
-        WHEN ${status} IN ('Shipped', 'Complete', 'Returned') THEN DATE_DIFF('day',${created_raw},${shipped_raw})*1.0
+        WHEN ${status} = 'Processing' THEN DATE_DIFF(${created_date},current_date(), day)*1.0
+        WHEN ${status} IN ('Shipped', 'Complete', 'Returned') THEN DATE_DIFF(${created_date},${shipped_raw},day)*1.0
         WHEN ${status} = 'Cancelled' THEN NULL
       END
        ;;
@@ -214,7 +214,7 @@ view: order_items {
 
   dimension: shipping_time {
     type: number
-    sql: datediff('day',${shipped_raw},${delivered_raw})*1.0 ;;
+    sql: date_diff(${shipped_date},${delivered_date},day)*1.0 ;;
   }
 
   measure: average_days_to_process {

@@ -11,7 +11,6 @@ view: user_order_facts {
       FROM looker-private-demo.ecomm.order_items
       GROUP BY user_id
        ;;
-    datagroup_trigger: looker-private-demo.ecommerce_etl
   }
 
   dimension: user_id {

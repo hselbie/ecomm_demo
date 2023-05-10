@@ -1,6 +1,5 @@
 view: sessions {
   derived_table: {
-    datagroup_trigger: looker-private-demo.ecommerce_etl
     sql: SELECT
         session_id
         , MIN(created_at) AS session_start

@@ -11,7 +11,6 @@ view: repeat_purchase_facts {
         AND order_items.created_at < repeat_order_items.created_at
       GROUP BY 1
        ;;
-    datagroup_trigger: looker-private-demo.ecommerce_etl
   }
 
   dimension: order_id {
